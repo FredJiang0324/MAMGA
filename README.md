@@ -213,14 +213,11 @@ A more detailed documentation is coming soon 🚀, and we will update in the Git
 **If you find this project useful, please consider citing our paper:**
 
 ```bibtex
-@misc{jiang2026magmamultigraphbasedagentic,
-      title={MAGMA: A Multi-Graph based Agentic Memory Architecture for AI Agents}, 
-      author={Dongming Jiang and Yi Li and Guanpeng Li and Bingzhe Li},
-      year={2026},
-      eprint={2601.03236},
-      archivePrefix={arXiv},
-      primaryClass={cs.AI},
-      url={https://arxiv.org/abs/2601.03236}, 
+@article{jiang2026magma,
+  title={MAGMA: A Multi-Graph based Agentic Memory Architecture for AI Agents},
+  author={Jiang, Dongming and Li, Yi and Li, Guanpeng and Li, Bingzhe},
+  journal={arXiv preprint arXiv:2601.03236},
+  year={2026}
 }
 ```
 
