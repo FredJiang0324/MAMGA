@@ -32,7 +32,8 @@ rescored_results_*.json
 results_analysis*.log
 
 # IDE
-.vscode/
+.vscode/*
+!.vscode/mcp.json
 .idea/
 *.swp
 *.swo

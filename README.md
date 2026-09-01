@@ -176,6 +176,48 @@ top_k_final = 5            # Final context nodes
 max_traversal_hops = 3     # Graph traversal depth
 ```
 
+## MCP Integration (VS Code)
+
+MAGMA runs as a **local FastMCP stdio server** — no separate hosted service required. VS Code launches `mcp_server.py` via [`.vscode/mcp.json`](.vscode/mcp.json).
+
+> The same stdio server also works in **Cursor** (`.cursor/mcp.json` is included in this repo).
+
+### Setup
+
+1. Install dependencies (includes `fastmcp`):
+
+```bash
+pip install -r requirements.txt
+```
+
+2. Copy `.env.example` to `.env` and set `OPENAI_API_KEY` (optional but improves event extraction).
+
+3. On macOS/Linux, change `venv/Scripts/python.exe` to `venv/bin/python` in `.vscode/mcp.json`.
+
+4. In VS Code: **Command Palette** → **MCP: List Servers** → start **magma**.
+
+5. Open **Copilot Agent** chat. Tools `magma_add`, `magma_search`, `magma_stats`, and `magma_save` should appear.
+
+### MCP tools
+
+| Tool | Purpose |
+|------|---------|
+| `magma_add` | Store a fact or conversation turn |
+| `magma_search` | Retrieve graph context for a question |
+| `magma_stats` | Node/vector/link counts |
+| `magma_save` | Persist memory to disk |
+
+Memory is stored under `MAGMA_PERSIST_DIR` (default `./magma_store`). `magma_add` auto-saves after each write.
+
+### Environment variables
+
+| Variable | Default | Description |
+|----------|---------|-------------|
+| `MAGMA_PERSIST_DIR` | `./magma_store` | Where graph and vectors are saved |
+| `OPENAI_API_KEY` | — | Enables LLM-based event extraction (read from `.env`) |
+| `DEFAULT_MODEL` | `gpt-4o-mini` | LLM model for extraction |
+| `DEFAULT_EMBEDDING_MODEL` | `minilm` | `minilm` or `openai` |
+
 
 ## File Structure
 
@@ -188,6 +230,10 @@ trg-memory/
 │   ├── query_engine.py     # Query processing
 │   ├── memory_builder.py   # Memory construction
 │   └── ...
+├── magma_service.py        # Service layer for MCP
+├── mcp_server.py           # FastMCP stdio server
+├── .vscode/mcp.json        # MCP config (VS Code)
+├── .cursor/mcp.json        # MCP config (Cursor, same server)
 ├── utils/                   # Utility modules
 │   ├── memory_layer.py     # LLM controller
 │   └── load_dataset.py     # Dataset loader
